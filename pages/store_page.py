@@ -8,31 +8,38 @@ from pages.base_page import BasePage
 class StorePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
+        self._airpods_link = page.locator("//a[@class='rf-productnav-card-title'][contains(text(), 'AirPods')]")
         self._first_product_buy = page.locator("//section[2]//li[1]/div//a")
-        self._button_add_to_cart = page.locator("//button[contains(@id, 'add-to-cart')]")
-        self.review_cart_button = page.get_by_role("button", name="Review Cart")
+        self.cart_review = page.locator("//h1[@class='rs-bag-header']")
+        self._buy_product = page.locator("//a[@class='icon-wrapper button button-elevated buy']")
+        self._button_add_to_cart = page.get_by_text("Add to Bag")
 
     @allure.step
     def get_page(self):
-        self.page.goto("https://www.razer.com/store", wait_until='load')
-        time.sleep(1)
+        self.page.goto(self.base_page + "store")
+        # self.page.goto(self.base_page + "store", wait_until='load')
+
 
 
     @allure.step
-    def click_first_product_buy(self):
-        self.find_element(self._first_product_buy).click()
+    def go_to_category_airpods(self):
+        self.find_element(self._airpods_link).click()
         # self.page.wait_for_selector("//section[2]//li[1]/div//a", timeout=30000).click()
+
+
+    @allure.step
+    def buy_product(self):
+        s = self.find_element(self._buy_product).click()
+        # self.page.wait_for_selector("//button[contains(@id, 'add-to-cart')]", timeout=30000).click()
 
 
     @allure.step
     def add_to_cart(self):
         self.find_element(self._button_add_to_cart).click()
-        # self.page.wait_for_selector("//button[contains(@id, 'add-to-cart')]", timeout=30000).click()
-
 
     @allure.step
-    def wait_review_cart(self):
-        self.find_element(self.review_cart_button)
+    def wait_cart(self):
+        self.find_element(self.cart_review)
 
     @allure.step
     def pause(self, x):
