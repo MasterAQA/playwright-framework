@@ -36,7 +36,7 @@ def test_main_menu(main_page):
 @allure.feature("Main Page")
 @allure.story("Search")
 @allure.title("Test search function")
-def test_search(main_page):
+def test_search_function_on_main_page(main_page):
     main_page.get_page()
     main_page.click_search_input()
     main_page.search_fill_and_browse("iPhone")

@@ -8,6 +8,7 @@ from pages.base_page import BasePage
 from pages.cart_page import CartPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.search_page import SearchPage
 from pages.store_page import StorePage
 
 
@@ -89,6 +90,10 @@ def login_page(get_page) -> LoginPage:
 @pytest.fixture()
 def cart_page(get_page) -> CartPage:
     return CartPage(get_page)
+
+@pytest.fixture()
+def search_page(get_page) -> SearchPage:
+    return SearchPage(get_page)
 
 
 def pytest_addoption(parser):
