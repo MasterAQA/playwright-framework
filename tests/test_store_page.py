@@ -1,6 +1,3 @@
-import random
-import time
-
 import allure
 import pytest
 from playwright.sync_api import expect
@@ -20,14 +17,6 @@ def test_add_product(store_page):
 
 
 
-    # store_page.get_page()
-    # # store_page.reject_cookie_button()
-    # store_page.click_first_product_buy()
-    # store_page.add_to_cart()
-    #
-    # expect(store_page.review_cart_button).to_be_visible()
-
-
 @pytest.mark.flaky(reruns=2)
 @allure.feature("Cart")
 @allure.story("Add and Remove")
@@ -44,6 +33,3 @@ def test_add_and_remove_product(store_page, cart_page):
     cart_page.remove_product()
     expect(cart_page.empty_cart).to_be_visible()
 
-    # assert cart_page.empty_cart.is_visible()
-
-    # expect(cart_page.empty_cart).

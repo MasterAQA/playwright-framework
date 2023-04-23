@@ -12,6 +12,7 @@ class MainPage(BasePage):
         self.results_search = page.locator("//div[@class='rf-serp-resultcount']")
         self.sub_category = page.locator("//li[@class='globalnav-submenu-list-item-elevated'][1]/a")
 
+
     @allure.step
     def get_page(self):
         self.page.goto(self.base_page)

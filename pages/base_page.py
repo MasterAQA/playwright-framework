@@ -8,7 +8,6 @@ class BasePage:
         self.page = page
         self.base_page = base_page
 
-
     def find_element(self, element: Locator, default_timeout=15000) -> Locator:
         element.wait_for(timeout=default_timeout)
         return element

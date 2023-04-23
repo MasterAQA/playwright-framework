@@ -17,20 +17,18 @@ class StorePage(BasePage):
     @allure.step
     def get_page(self):
         self.page.goto(self.base_page + "store")
-        # self.page.goto(self.base_page + "store", wait_until='load')
-
 
 
     @allure.step
     def go_to_category_airpods(self):
         self.find_element(self._airpods_link).click()
-        # self.page.wait_for_selector("//section[2]//li[1]/div//a", timeout=30000).click()
+
 
 
     @allure.step
     def buy_product(self):
-        s = self.find_element(self._buy_product).click()
-        # self.page.wait_for_selector("//button[contains(@id, 'add-to-cart')]", timeout=30000).click()
+        self.find_element(self._buy_product).click()
+
 
 
     @allure.step
