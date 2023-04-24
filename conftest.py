@@ -17,6 +17,7 @@ def get_playwright():
     with sync_playwright() as playwright:
         yield playwright
 
+
 @pytest.fixture(scope="session", params=["chromium", "firefox", "webkit"])
 def get_browser(get_playwright, request):
 
@@ -44,9 +45,8 @@ def get_browser(get_playwright, request):
     del os.environ["PWBROWSER"]
 
 
-
 @pytest.fixture(scope="session")
-def get_page(get_browser, request):
+def get_page(get_browser):
     context = get_browser.new_context()
     context.set_default_timeout(20000)
     page = context.new_page()
@@ -63,8 +63,6 @@ def get_page(get_browser, request):
     page.context.tracing.stop(path="reports/trace.zip")
 
 
-
-
 # @pytest.fixture(scope="function")
 # def screen_and_video(get_page, request):
 #     # yield get_page
@@ -72,6 +70,7 @@ def get_page(get_browser, request):
 #     video = get_page.video.path()
 #     allure.attach(screenshot, name=f"{request.node.name}", attachment_type=allure.attachment_type.PNG)
 #     allure.attach.file(f'./{video}', attachment_type=allure.attachment_type.WEBM)
+
 
 @pytest.fixture()
 def main_page(get_page) -> MainPage:
@@ -83,13 +82,16 @@ def main_page(get_page) -> MainPage:
 def store_page(get_page) -> StorePage:
     return StorePage(get_page)
 
+
 @pytest.fixture()
 def login_page(get_page) -> LoginPage:
     return LoginPage(get_page)
 
+
 @pytest.fixture()
 def cart_page(get_page) -> CartPage:
     return CartPage(get_page)
+
 
 @pytest.fixture()
 def search_page(get_page) -> SearchPage:
@@ -98,7 +100,3 @@ def search_page(get_page) -> SearchPage:
 
 def pytest_addoption(parser):
     parser.addini("headless", help="run browser in headless mode", default="True")
-
-
-
-

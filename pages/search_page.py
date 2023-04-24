@@ -9,8 +9,6 @@ class SearchPage(BasePage):
         self._search_input = page.locator("//input[@id='searchform-input']")
         self.results_search = page.locator("//div[@class='rf-serp-resultcount']")
 
-
-
     @allure.step
     def get_page(self):
         self.page.goto(self.base_page + "us/searchj")
@@ -20,10 +18,4 @@ class SearchPage(BasePage):
         self.find_element(self._search_input)
         self._search_input.click()
         self.page.keyboard.type(search_text)
-        self.page.keyboard.press('Enter')
-
-
-
-
-
-
+        self.page.keyboard.press("Enter")

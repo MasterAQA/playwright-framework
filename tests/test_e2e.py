@@ -28,4 +28,3 @@ from playwright.sync_api import expect
 #     cart_page.wait_empty_cart()
 #
 #     assert cart_page.empty_cart.is_visible()
-

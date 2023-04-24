@@ -12,14 +12,10 @@ class BasePage:
         element.wait_for(timeout=default_timeout)
         return element
 
-
     @allure.step
     def delete_cookies(self):
         self.page.context.clear_cookies()
 
-
     @allure.step
     def reload(self):
         self.page.reload(wait_until="load")
-
-
