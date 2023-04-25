@@ -18,9 +18,15 @@ def get_playwright():
         yield playwright
 
 
-@pytest.fixture(scope="session", params=["chromium", "firefox", "webkit"])
-def get_browser(get_playwright, request):
+def pytest_generate_tests(metafunc):
+    if "get_browser" in metafunc.fixturenames:
 
+        # metafunc.parametrize("get_browser", metafunc.config.getini("browsers"), indirect=True)
+        metafunc.parametrize("get_browser", metafunc.config.getoption("--browsers"), indirect=True)
+
+
+@pytest.fixture(scope="session")
+def get_browser(get_playwright, request):
     browser = request.param
     # save browser type to env variable so fixtures and tests can get current browser
     # Needed to skip unused browser-test combinations
@@ -31,11 +37,11 @@ def get_browser(get_playwright, request):
     else:
         headless = False
 
-    if browser == "chromium":
+    if "chromium" in browser:
         bro = get_playwright.chromium.launch(headless=headless)
-    elif browser == "firefox":
+    elif "firefox" in browser:
         bro = get_playwright.firefox.launch(headless=headless)
-    elif browser == "webkit":
+    elif "webkit" in browser:
         bro = get_playwright.webkit.launch(headless=headless)
     else:
         assert False, "unsupported browser type"
@@ -78,7 +84,6 @@ def main_page(get_page) -> MainPage:
 
 
 @pytest.fixture()
-# @pytest.mark.parametrize("request", params=["chromium", "firefox"], indirect=['get_browser'])
 def store_page(get_page) -> StorePage:
     return StorePage(get_page)
 
@@ -100,3 +105,7 @@ def search_page(get_page) -> SearchPage:
 
 def pytest_addoption(parser):
     parser.addini("headless", help="run browser in headless mode", default="True")
+    # parser.addini("browsers", help="run browsers", default=["chromium", "firefox", "webkit"])
+    parser.addoption(
+        "--browsers", action="append", default=[], help="list of stringinputs to pass to test functions",
+    )
