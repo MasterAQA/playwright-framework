@@ -60,12 +60,8 @@ def get_page(page: Page, request):
 
     screenshot = page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
     allure.attach(screenshot, name=f"{request.node.name}", attachment_type=allure.attachment_type.PNG)
+
     # video = page.video.path()
-
-    # screenshot = page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
-
-
-    # allure.attach(screenshot, name=f"{request.node.name}", attachment_type=allure.attachment_type.PNG)
     # allure.attach.file(f'./{video}', attachment_type=allure.attachment_type.WEBM)
 
     page.close()
