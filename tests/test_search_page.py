@@ -3,7 +3,7 @@ import pytest
 from playwright.sync_api import expect
 
 
-@pytest.mark.only_browser("firefox")
+@pytest.mark.only_browser("chromium")
 @allure.feature("Search Page")
 @allure.story("Search")
 @allure.title("Test search page and function")

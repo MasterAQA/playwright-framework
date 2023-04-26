@@ -2,7 +2,8 @@ import allure
 import pytest
 from playwright.sync_api import expect
 
-@pytest.mark.only_browser("firefox")
+
+@pytest.mark.only_browser("chromium")
 @allure.feature("Cart")
 @allure.story("Add in Cart")
 @allure.title("Add product in Cart")
@@ -15,7 +16,8 @@ def test_add_product(store_page):
 
     expect(store_page.cart_review).to_be_visible()
 
-@pytest.mark.only_browser("firefox")
+
+@pytest.mark.only_browser("chromium")
 @pytest.mark.flaky(reruns=2)
 @allure.feature("Cart")
 @allure.story("Add and Remove")

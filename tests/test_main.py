@@ -16,7 +16,7 @@ main_directories = [
     "Support",
 ]
 
-@pytest.mark.only_browser("firefox")
+
 @allure.feature("Main Page")
 @allure.story("Main Page")
 @allure.title("Test all directories displays")
@@ -26,7 +26,8 @@ def test_main_menu(main_page):
     for directory in main_directories:
         expect(main_page.check_category(directory)).to_be_visible()
 
-@pytest.mark.skip_browser("chromium")
+
+@pytest.mark.only_browser("chromium")
 @allure.feature("Main Page")
 @allure.story("Search")
 @allure.title("Test search function")

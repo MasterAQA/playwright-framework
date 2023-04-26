@@ -7,14 +7,10 @@ from pages.base_page import BasePage
 class StorePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-        self._airpods_link = page.locator(
-            "//a[@class='rf-productnav-card-title'][contains(text(), 'AirPods')]"
-        )
+        self._airpods_link = page.locator("//a[@class='rf-productnav-card-title'][contains(text(), 'AirPods')]")
         self._first_product_buy = page.locator("//section[2]//li[1]/div//a")
         self.cart_review = page.locator("//h1[@class='rs-bag-header']")
-        self._buy_product = page.locator(
-            "//a[@class='icon-wrapper button button-elevated buy']"
-        )
+        self._buy_product = page.locator("//a[@class='icon-wrapper button button-elevated buy']")
         self._button_add_to_cart = page.get_by_text("Add to Bag")
 
     @allure.step

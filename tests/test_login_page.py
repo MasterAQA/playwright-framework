@@ -3,7 +3,8 @@ import pytest
 from playwright.sync_api import expect
 from config import apple_username, apple_password
 
-@pytest.mark.only_browser("firefox")
+
+@pytest.mark.only_browser("chromium")
 @pytest.mark.flaky(reruns=2)
 @allure.feature("Login")
 @allure.story("Login")
