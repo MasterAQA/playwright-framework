@@ -1,7 +1,7 @@
 import allure
 import pytest
-from playwright.sync_api import expect
 
+from pages.main_page import MainPage
 
 main_directories = [
     "Store",
@@ -20,20 +20,25 @@ main_directories = [
 @allure.feature("Main Page")
 @allure.story("Main Page")
 @allure.title("Test all directories displays")
-def test_main_menu(main_page):
+def test_main_menu(get_page):
+    main_page = MainPage(get_page)
+
     main_page.get_page()
 
     for directory in main_directories:
-        expect(main_page.check_category(directory)).to_be_visible()
+        main_page.category(directory).check_is_visible()
 
 
 @pytest.mark.only_browser("chromium")
 @allure.feature("Main Page")
 @allure.story("Search")
 @allure.title("Test search function")
-def test_search_function_on_main_page(main_page):
-    main_page.get_page()
-    main_page.click_search_input()
-    main_page.search_fill_and_browse("iPhone")
+def test_search_function(get_page):
+    main_page = MainPage(get_page)
 
-    expect(main_page.results_search).to_be_visible()
+    main_page.get_page()
+    main_page.search_icon_button.click()
+    main_page.search_input.keyboard_fill("iPhone", get_page)
+
+    main_page.result_search.check_is_visible()
+
