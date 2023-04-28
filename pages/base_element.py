@@ -11,3 +11,7 @@ class BaseElement:
     def wait_to_be_visible(self):
         with allure.step(f"Wait until [{self.name}] is visible"):
             expect(self.selector).to_be_visible()
+
+    def check_is_visible(self):
+        with allure.step(f"Check what [{self.name}] is visible"):
+            expect(self.selector).to_be_visible()
