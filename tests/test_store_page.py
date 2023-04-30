@@ -22,7 +22,7 @@ def test_add_product(page):
 
 
 @pytest.mark.only_browser("chromium")
-@pytest.mark.flaky(reruns=2)
+# @pytest.mark.flaky(reruns=2)
 @allure.feature("Cart")
 @allure.story("Add and Remove")
 @allure.title("Add product, and remove from Cart")

@@ -6,7 +6,7 @@ from pages.login_page import LoginPage
 
 
 @pytest.mark.only_browser("chromium")
-@pytest.mark.flaky(reruns=2)
+# @pytest.mark.flaky(reruns=2)
 @allure.feature("Login")
 @allure.story("Login")
 @allure.title("Login in Apple account, check two-factor auth")

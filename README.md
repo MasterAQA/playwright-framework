@@ -29,6 +29,8 @@ APPLE_PASSWORD = "SDA51345sadwq!"
 ```
 pytest tests/
 # in docker run only in headless mode
+# in docker make sure you are in the /usr/src/app directory
+command for this: cd /usr/src/app
 ```
 
 ### By default, what pytest.ini uses:
