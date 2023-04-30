@@ -1,6 +1,5 @@
 import allure
 from playwright.sync_api import Page
-from unicodedata import name
 
 
 class BasePage:
