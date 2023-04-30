@@ -19,6 +19,7 @@ class data:
 @pytest.fixture(scope="function")
 def open(browser: Browser, request):
     context = Browser.new_context(self=browser)
+    context.set_default_timeout(10000)
     page = context.new_page()
 
     page.context.tracing.start(screenshots=True, snapshots=True, sources=True)

@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from locators.loc_main_page import Button, Input, Text, Item
+from locators.locators import Button, Input, Text, Item
 
 
 class MainPage(BasePage):

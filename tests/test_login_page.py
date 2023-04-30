@@ -16,6 +16,7 @@ def test_login(open):
     login_page.go_to("https://www.apple.com/shop/bag")
     login_page.sign_in.click()
     login_frame = login_page.page.frame_locator("//iframe")
+
     login_page.account_input.keyboard_fill_using_iframe(
         env.apple_username, login_frame, open
     )

@@ -1,4 +1,4 @@
-from locators.loc_search_page import Input, Text
+from locators.locators import Input, Text
 from pages.base_page import BasePage
 
 

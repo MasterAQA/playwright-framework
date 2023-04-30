@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from locators.loc_store_page import Button, Text
+from locators.locators import Button, Text
 
 
 class StorePage(BasePage):

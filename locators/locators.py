@@ -52,10 +52,6 @@ class Text(BaseElement):
             return self.selector.text_content()
 
 
-class Iframe(BaseElement):
+class Item(BaseElement):
     def __init__(self, selector: playwright.sync_api.Locator, name: str):
         super().__init__(selector, name)
-
-    def choose(self):
-        with allure.step(f"Choose iframe [{self.name}]"):
-            self.selector.click()

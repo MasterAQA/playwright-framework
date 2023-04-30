@@ -1,4 +1,4 @@
-from locators.loc_cart_page import Button, Text
+from locators.locators import Button, Text
 from pages.base_page import BasePage
 
 

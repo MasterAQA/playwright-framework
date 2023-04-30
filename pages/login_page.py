@@ -1,4 +1,4 @@
-from locators.loc_login_page import Button, Input, Text
+from locators.locators import Button, Input, Text
 from pages.base_page import BasePage
 
 

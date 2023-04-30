@@ -8,7 +8,7 @@ class BasePage:
         self.page = page
 
     def go_to(self, url: str):
-        with allure.step(f"Open {name} page"):
+        with allure.step(f"Open {url} page"):
             self.page.goto(url)
 
     @allure.step
