@@ -1,10 +1,27 @@
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Browser
 import pytest
+import os
+
+from pathlib import Path
+from dotenv import load_dotenv
+
+dotenv_path = Path("../.env")
+load_dotenv(dotenv_path=dotenv_path)
+
+
+class data:
+
+
+    apple_username = os.getenv("APPLE_USERNAME")
+    apple_password = os.getenv("APPLE_PASSWORD")
 
 
 @pytest.fixture(scope="function")
-def get_page(page: Page, request):
+def open(browser: Browser, request):
+    context = Browser.new_context(self=browser)
+    page = context.new_page()
+
     page.context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     yield page
@@ -20,5 +37,3 @@ def get_page(page: Page, request):
 
     page.close()
     page.context.tracing.stop(path="reports/trace.zip")
-
-

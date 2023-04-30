@@ -1,20 +1,24 @@
 import allure
 import pytest
-from playwright.sync_api import expect
+
+from pages.cart_page import CartPage
+from pages.store_page import StorePage
 
 
 @pytest.mark.only_browser("chromium")
 @allure.feature("Cart")
 @allure.story("Add in Cart")
 @allure.title("Add product in Cart")
-def test_add_product(store_page):
-    store_page.get_page()
-    store_page.go_to_category_airpods()
-    store_page.buy_product()
-    store_page.add_to_cart()
-    store_page.wait_cart()
+def test_add_product(page):
+    store_page = StorePage(page)
 
-    expect(store_page.cart_review).to_be_visible()
+    store_page.go_to("https://www.apple.com/store")
+    store_page.go_to_category_airpods.click()
+    store_page.buy_product.click()
+    store_page.add_to_cart.click()
+    store_page.cart.wait_for_element()
+
+    store_page.cart.check_is_visible()
 
 
 @pytest.mark.only_browser("chromium")
@@ -22,14 +26,18 @@ def test_add_product(store_page):
 @allure.feature("Cart")
 @allure.story("Add and Remove")
 @allure.title("Add product, and remove from Cart")
-def test_add_and_remove_product(store_page, cart_page):
-    store_page.get_page()
-    store_page.go_to_category_airpods()
-    store_page.buy_product()
-    store_page.add_to_cart()
-    store_page.wait_cart()
+def test_add_and_remove_product(open):
+    store_page = StorePage(open)
+    cart_page = CartPage(open)
 
-    expect(store_page.cart_review).to_be_visible()
+    store_page.go_to("https://www.apple.com/store")
+    store_page.go_to_category_airpods.click()
 
-    cart_page.remove_product()
-    expect(cart_page.empty_cart).to_be_visible()
+    store_page.buy_product.click()
+    store_page.add_to_cart.click()
+    store_page.cart.wait_for_element()
+
+    store_page.cart.check_is_visible()
+
+    cart_page.remove_product.click()
+    cart_page.empty_cart.check_is_visible()

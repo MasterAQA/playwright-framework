@@ -1,16 +1,10 @@
-import allure
-
 from pages.base_page import BasePage
-from pages.locators import Button, Input, Text, Item
+from locators.loc_main_page import Button, Input, Text, Item
 
 
 class MainPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-
-    def get_page(self):
-        with allure.step(f"Go to [{self.base_page}]"):
-            self.page.goto(self.base_page)
 
     def category(self, category_name) -> Item:
         return Item(

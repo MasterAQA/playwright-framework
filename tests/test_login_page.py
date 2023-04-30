@@ -1,7 +1,8 @@
 import allure
 import pytest
-from playwright.sync_api import expect
-from config import apple_username, apple_password
+
+from conftest import data as env
+from pages.login_page import LoginPage
 
 
 @pytest.mark.only_browser("chromium")
@@ -9,8 +10,17 @@ from config import apple_username, apple_password
 @allure.feature("Login")
 @allure.story("Login")
 @allure.title("Login in Apple account, check two-factor auth")
-def test_login(login_page):
-    login_page.go_to_sign_in_page()
-    login_page.login(apple_username, apple_password)
+def test_login(open):
+    login_page = LoginPage(open)
 
-    expect(login_page.check_two_factor_auth()).to_be_visible()
+    login_page.go_to("https://www.apple.com/shop/bag")
+    login_page.sign_in.click()
+    login_frame = login_page.page.frame_locator("//iframe")
+    login_page.account_input.keyboard_fill_using_iframe(
+        env.apple_username, login_frame, open
+    )
+    login_page.password_input.keyboard_fill_using_iframe(
+        env.apple_password, login_frame, open
+    )
+
+    login_page.two_factor_auth.check_is_visible_using_iframe(login_frame)

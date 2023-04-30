@@ -8,10 +8,14 @@ class BaseElement:
         self.selector = selector
         self.name = name
 
-    def wait_to_be_visible(self):
-        with allure.step(f"Wait until [{self.name}] is visible"):
-            expect(self.selector).to_be_visible()
-
     def check_is_visible(self):
         with allure.step(f"Check what [{self.name}] is visible"):
             expect(self.selector).to_be_visible()
+
+    def wait_for_element(self):
+        with allure.step(f"Awaiting when [{self.name}] is visible"):
+            self.selector.wait_for()
+
+    def check_is_visible_using_iframe(self, iframe):
+        with allure.step(f"Check what [{self.name}] is visible on iframe"):
+            expect(iframe.locator(self.selector)).to_be_visible()

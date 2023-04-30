@@ -1,14 +1,18 @@
 import allure
 import pytest
-from playwright.sync_api import expect
+
+
+from pages.search_page import SearchPage
 
 
 @pytest.mark.only_browser("chromium")
 @allure.feature("Search Page")
 @allure.story("Search")
 @allure.title("Test search page and function")
-def test_search(search_page):
-    search_page.get_page()
-    search_page.search_fill_and_browse("Mac")
+def test_search(open):
+    search_page = SearchPage(open)
 
-    expect(search_page.results_search).to_be_visible()
+    search_page.go_to("https://www.apple.com/us/searchj")
+    search_page.search_input.keyboard_fill("Mac", open)
+
+    search_page.result_search.check_is_visible()

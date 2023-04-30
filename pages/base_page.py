@@ -1,16 +1,15 @@
 import allure
-from playwright.sync_api import Page, Locator
-from config import base_page
+from playwright.sync_api import Page
+from unicodedata import name
 
 
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
-        self.base_page = base_page
 
-    def find_element(self, element: Locator, default_timeout=15000) -> Locator:
-        element.wait_for(timeout=default_timeout)
-        return element
+    def go_to(self, url: str):
+        with allure.step(f"Open {name} page"):
+            self.page.goto(url)
 
     @allure.step
     def delete_cookies(self):

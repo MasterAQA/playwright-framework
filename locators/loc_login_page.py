@@ -1,8 +1,8 @@
 import allure
 import playwright
-from playwright.sync_api import Locator, expect
+from playwright.sync_api import Locator
 
-from pages.base_element import BaseElement
+from locators.base_element import BaseElement
 
 
 class Button(BaseElement):
@@ -19,7 +19,7 @@ class Input(BaseElement):
         super().__init__(selector, name)
 
     def fill(self, text: str):
-        with allure.step(f"Fill [{self.name}] - {text}"):
+        with allure.step(f"Fill [{self.name}] - [{text}]"):
             self.selector.fill(text)
 
     def clear(self):
@@ -31,8 +31,14 @@ class Input(BaseElement):
             self.selector.click()
 
     def keyboard_fill(self, text, page):
-        with allure.step(f"Fill [{self.name}] - {text} from keyboard"):
+        with allure.step(f"Fill [{self.name}] - [{text}] from keyboard"):
             self.selector.click()
+            page.keyboard.type(text)
+            page.keyboard.press("Enter")
+
+    def keyboard_fill_using_iframe(self, text, iframe, page):
+        with allure.step(f"Fill [{self.name}] - [{text}] from keyboard in iframe"):
+            iframe.locator(self.selector).click()
             page.keyboard.type(text)
             page.keyboard.press("Enter")
 
@@ -45,15 +51,11 @@ class Text(BaseElement):
         with allure.step(f"Get text from [{self.name}]"):
             return self.selector.text_content()
 
-    # def check_is_visible(self):
-    #     with allure.step(f"Check what [{self.name}] is visible"):
-    #         expect(self.selector).to_be_visible()
 
-
-class Item(BaseElement):
+class Iframe(BaseElement):
     def __init__(self, selector: playwright.sync_api.Locator, name: str):
         super().__init__(selector, name)
 
-    # def check_is_visible(self):
-    #     with allure.step(f"Check what [{self.name}] is visible"):
-    #         expect(self.selector).to_be_visible()
+    def choose(self):
+        with allure.step(f"Choose iframe [{self.name}]"):
+            self.selector.click()
