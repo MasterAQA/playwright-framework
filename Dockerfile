@@ -10,3 +10,5 @@ COPY . .
 RUN python -m playwright install
 RUN python -m playwright install-deps
 
+WORKDIR /usr/src/
+RUN touch .env

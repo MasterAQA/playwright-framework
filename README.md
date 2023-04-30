@@ -15,9 +15,14 @@ Allure reports are detailed, about each step.
 ## How to make an image in Docker
 To build a Docker image, run the following commands:
 ```
-- git clone https://github.com/MasterAQA/playwright-framework.git
-- docker build -t playwright-test-framework .
-- docker run -d -it playwright-test-framework 
+git clone https://github.com/MasterAQA/playwright-framework.git
+docker build -t playwright-test-framework . # it may take 500+ seconds
+docker run -d -it playwright-test-framework 
+
+Docker -> containers -> touch View files in new container
+go to directory usr/src/ and edit file .env, put this environments in
+APPLE_USERNAME = "fernardmiller443@gmail.com"
+APPLE_PASSWORD = "SDA51345sadwq!"
 ```
 
 ## How to run
@@ -27,14 +32,20 @@ pytest tests/
 ```
 
 ### By default, what pytest.ini uses:
+Can change pytest.ini to run tests with your own settings, for example 
+with one or two browsers, how many cores to burn tests and what reports 
+to generate
+
 Launch of 3 browsers: chromium, firefox, webkit
 ``` 
 --browser chromium --browser firefox --browser webkit
 ``` 
+
 Parallel running of tests
 ``` 
 -n 3
 ``` 
+
 Creation of xml, html, Allure reports
 ``` 
 --junitxml=reports/report.xml
