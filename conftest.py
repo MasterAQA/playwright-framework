@@ -12,7 +12,6 @@ load_dotenv(dotenv_path=dotenv_path)
 
 class data:
 
-
     apple_username = os.getenv("APPLE_USERNAME")
     apple_password = os.getenv("APPLE_PASSWORD")
 
