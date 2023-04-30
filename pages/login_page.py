@@ -5,10 +5,6 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-        self._go_to_sign_in = page.locator("//a[@class='form-button']")
-        self._email_input = page.locator("//input[@id='account_name_text_field']")
-        self._password_input = page.get_by_placeholder("Password")
-        self.identity_two_factor_auth = page.get_by_text("Two-Factor Authentication")
 
     @property
     def sign_in(self) -> Button:
